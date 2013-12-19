@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="./DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<meta charset=utf-8 />
+<title>Existing list</title>
+<style>
+</style>
+<script>
+  $(document).ready(function () {
+    $('#makers').dataTable({});
+    $('input').val(decodeURIComponent(location.search.substr(3, location.search.length))).keyup();
+  });
+</script>
+</head>
+  <body>
+    <div id='wrapper' class='container'>
+      <header>
+        <div class="page-header">
+          <h1>Game Developers Help List <small> By Zoe Quinn</small></h1>
+        </div>
+      </header>
+      <div class="well">
+        <p><small>Sort, Search, and Connect with the developers who want to help you.</small></p>
+      </div>
+      <div class="table-responsive">
+        <table id="makers" class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th> Twitter </th>
+              <th> Name    </th>
+              <th> Tags ("Whatchoo good for?") </th>
+          </thead>
+          <tbody>
+            <% rows.each do |row| %>
+              <tr>
+                <td><%= row.name %></td>
+                <td><a href="http://twitter.com/<%= row.twitter[0] == "@" ? row.twitter[1..-1] : row.twitter %>"><%= row.twitter %></a></td>
+                <td>
+                  <ul>
+                    <% row.tags.map(&:strip).each do |tag| %>
+                      <li><a href="index.html?q=<%= tag %>"><%= tag %></a></li>
+                    <% end %>
+                  </ul>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
