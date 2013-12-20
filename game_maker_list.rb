@@ -3,7 +3,7 @@ require 'csv'
 require 'erb'
 
 Row = Struct.new(:twitter, :name, :tags)
-data = CSV.read('./game-dev-list-12-17-13-14-00.csv', :headers => true)
+data = CSV.read('./data/game-dev-list-12-17-13-14-00.csv', :headers => true)
 
 rows = data.map { |x| x.to_hash }.map do |row|
   tag_str = row['Whatchoo good for?'] || ""
